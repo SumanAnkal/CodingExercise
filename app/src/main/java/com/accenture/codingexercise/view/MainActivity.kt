@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         mViewModel = ViewModelProvider(this).get(MainClassViewModel::class.java)
 
-        supportActionBar?.title = ""   //Initially ActionBar text to be empty
+        supportActionBar?.title = ""   //Initially ActionBar text will be empty
         swipeRefreshLayout.isRefreshing = true //To Show refresh button the screen
 
         getDataFromViewModel() //To get data from ViewModel class

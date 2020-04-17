@@ -48,6 +48,7 @@ class CustomAdapter(private val context: Context) :
             .asDrawable()
             .load(mList[position].imageHref)
             .into(holder.image)
+
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
