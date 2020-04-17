@@ -1,6 +1,7 @@
 package com.accenture.codingexercise.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -32,20 +33,7 @@ class MainActivity : AppCompatActivity() {
         swipeRefreshLayout.setOnRefreshListener {
             getDataFromViewModel()   //To Update new data
         }
-
-        mViewModel.mProgressBar.observe(this, Observer {
-            if (it) {
-                swipeRefreshLayout.isRefreshing = false
-            }
-        })
-
-        mViewModel.mResponse.observe(this, Observer {
-            supportActionBar?.title =
-                it.title  //The title in the ActionBar will updated from the json data.
-            mAdapter.setDataToList(it.rows)  //Set aLl data to the list
-            swipeRefreshLayout.isRefreshing = false  //Hide the refresh button
-        })
-
+        setObserverForSwipeRefreshLayout()
 
         mAdapter = CustomAdapter(this) // Create object of Custom Adapter
         recyclerView.layoutManager =
@@ -58,5 +46,20 @@ class MainActivity : AppCompatActivity() {
      */
     private fun getDataFromViewModel() {
         mViewModel.getServerResponse()
+    }
+
+    private fun setObserverForSwipeRefreshLayout(){
+        mViewModel.mProgressBar.observe(this, Observer {
+            if (it) {
+                swipeRefreshLayout.isRefreshing = false
+            }
+        })
+
+        mViewModel.mResponse.observe(this, Observer {
+            supportActionBar?.title =
+                it.title  //The title in the ActionBar will updated from the json data.
+            mAdapter.setDataToList(it.rows)  //Set aLl data to the list
+            swipeRefreshLayout.isRefreshing = false  //Hide the refresh button
+        })
     }
 }

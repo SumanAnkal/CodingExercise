@@ -1,7 +1,7 @@
 package com.task.accenturelistviewtask.network.model
 
 data class DataModel(
-    val rows: List<Row>,
+    val rows: ArrayList<Row>,
     val title: String
 )
 
